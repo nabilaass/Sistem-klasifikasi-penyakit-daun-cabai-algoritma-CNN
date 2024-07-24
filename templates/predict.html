@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Hasil Klasifikasi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../static/src/styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <a href="/" class="logo"><img src="../static/img/logo.png" alt=""></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar">
+            <li><a href="/">DASHBOARD</a></li>
+        </ul>
+    </header>
+
+    <section class="page-section" id="deskripsi">
+        <div class="heading">
+        <br><br><br>
+        <h1>Hasil Klasifikasi</h1>
+        </div>
+        <div class="ps-text">
+        </br> </br>
+            <h4 class="" id="info-prediksi">
+                {% for prediction in predictions %}
+                    Penyakit: {{ prediction }}
+                {% endfor %}
+            </h4>
+
+            <div id="usage-instructions">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Informasi</th>
+                            <th scope="col">Deskripsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prediction in predictions %}
+                            {% if prediction == 'Bercak Daun' %}
+                                <tr>
+                                    <td>Penyebab Penyakit</td>
+                                    <td>Jamur (Cercospora spp., Alternaria spp.)</td>
+                                </tr>
+                                <tr>
+                                    <td>Cara Penanganan</td>
+                                    <td>
+                                        <ul>
+                                            <li> - Pencegahan: Gunakan benih yang sehat dan tahan penyakit.
+                                                Lakukan rotasi tanaman untuk mencegah penumpukan patogen di tanah.</li></br>
+                                            <li> -  Pengendalian: Buang dan bakar daun yang terinfeksi.
+                                                Jaga kebersihan kebun dan hindari penumpukan sisa-sisa tanaman yang bisa menjadi tempat berkembang biak jamur.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Obat</td>
+                                    <td>Fungisida: Aplikasikan fungisida yang mengandung mancozeb, chlorothalonil, atau copper oxychloride secara berkala sesuai petunjuk.</td>
+                                </tr>
+                            {% elif prediction == 'Keriting Daun' %}
+                                <tr>
+                                    <td>Penyebab Penyakit</td>
+                                    <td>Serangga (Aphid, Thrips) yang dapat membawa virus</td>
+                                </tr>
+                                <tr>
+
+                                    <td>Cara Penanganan</td>
+                                    <td>
+                                        <ul>
+                                            <li> - Pencegahan: Gunakan varietas tahan virus dan tanam tanaman penghalang seperti jagung untuk mengurangi serangan hama.</li>
+                                        </br><li> - Pengendalian: Kontrol populasi serangga dengan insektisida. Penggunaan mulsa plastik dapat mengurangi populasi hama.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Obat</td>
+                                    <td>Insektisida: Gunakan insektisida seperti imidacloprid, abamectin, atau thiamethoxam untuk mengendalikan hama pembawa virus.</td>
+                                </tr>
+                            {% elif prediction == 'Daun Sehat' %}
+                                    <tr>
+                                        <td>Penyebab Penyakit</td>
+                                        <td>Daun sehat cukup pertahankan perawatan yang baik</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Cara Penanganan</td>
+                                        <td>Tetap jaga kebersihan lingkungan</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Obat</td>
+                                        <td>Vitamin tanaman</td>
+                                    </tr>
+                            {% elif prediction == 'Tidak Diketahui' %}
+                                <tr>
+                                        <td>Penyebab Penyakit</td>
+                                        <td>Penyebab tidak diketahui</td>
+                                </tr>
+                                <tr>
+                                    <td>Cara Penanganan</td>
+                                    <td>Konsultasikan dengan ahli</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Obat</td>
+                                    <td>Obat tidak tersedia</td>
+                                </tr>
+                            {% elif prediction == 'Virus Kuning' %}
+                            <tr>
+                                <td>Penyebab Penyakit</td>
+                                <td>Virus yang ditularkan oleh serangga (Whiteflies - Bemisia tabaci)</td>
+                            </tr>
+
+                                <tr>
+                                    <td>Cara Penanganan</td>
+                                    <td>
+                                        <ul>
+                                            <li> - Pencegahan: Gunakan varietas tahan virus. Implementasikan rotasi tanaman dan hindari menanam cabai di area yang sebelumnya terinfeksi.</li>
+                                        </br><li> - Pengendalian: Gunakan perangkap kuning untuk mengurangi populasi whiteflies. Jaga kebersihan area sekitar tanaman dan segera buang tanaman yang terinfeksi parah.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Obat</td>
+                                    <td>Insektisida: Aplikasikan insektisida seperti buprofezin, pyriproxyfen, atau spiromesifen untuk mengendalikan whiteflies.</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td>Penyakit</td>
+                                    <td>SILAHKAN FOTO ULANG</td>
+                                </tr>
+                                <tr>
+                                    <td>Cara Penanganan</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Penyebab Penyakit</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>Obat</td>
+                                    <td>-</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </br>
+            <a class="btn btn-primary mt-1" href="/">Kembali</a>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <p> © All rights reserved to CabaiCare.2024</p></br>
+    </footer>
+
+    
+     <!-- Bootstrap JS and dependencies -->
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+ </body>
+ </html>

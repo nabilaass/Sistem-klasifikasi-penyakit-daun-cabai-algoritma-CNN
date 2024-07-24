@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identifikasi Disease</title>
+    <link rel="stylesheet" href="../static/src/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <a href="#" class="logo"><img src="../static/img/logo.png" alt=""></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar">
+            <li><a href="#home">DASHBOARD</a></li>
+        </ul>
+    </header>
+
+    <!-- HOME -->
+    <section class="home" id="home">
+        <div class="home-text">
+            <!-- <span>Cabai Care</span> -->
+            <br>
+            <h1>Website Identifikasi Penyakit Daun Cabai</h1>
+            <br>
+            <a href="#klasifikasi" class="btn">Periksa Sekarang</a>
+        </div>
+        <div class="home-img">
+            <img src="../static/img/home.png" alt="">
+        </div>
+    </section>
+
+    <section class="page-section" id="deskripsi">
+        <div class="heading">
+            <span>Deskripsi</span>
+            <h1>Informasi Website</h1>
+        </div>
+        <div class="container">
+            <div class="ps-img">
+                <img src="../static/img/daun.jpg" width="50px" height="300px" alt="">
+            </div>
+            <div class="ps-text">
+                <h2>CABAI CARE</h2>
+                <p>adalah aplikasi yang berfungsi sebagai ahli agronomi pribadi yang dapat dibawa-bawa di saku dan dirancang
+                    untuk membantu petani dalam mengidentifikasi penyakit yang menyerang tanaman cabai.
+                    Melalui penggunaan teknologi pengolahan citra dan kecerdasan buatan, aplikasi ini dapat mengenali gejala-gejala penyakit 
+                    pada daun cabai berdasarkan gambar yang diunggah. Setelah gambar diunggah, maka sistem akan menganalisis gambar tersebut dan
+                    memberikan informasi tentang penyakit tersebut serta petani dapat mengetahui penyebab dan solusi untuk mengatasi penyakit tersebut.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="page-section" id="klasifikasi">
+        <div class="heading">
+            <span>Klasifikasi</span>
+            <h1>Penyakit Tanaman Cabai Anda</h1>
+        </div>
+        <div class="container">
+            <div class="ps-text">
+                <form id="upload-form" action="/predict" method="POST" enctype="multipart/form-data">
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <div>
+                            <div id="camera"></div>
+                            <div id="result" style="max-width: 100%;">
+                                <img id="result-img" style="width: 100%; height: auto; display: none;" />
+                            </div>
+                            <div style="text-align: center;">
+                                <button type="button" class="btn btn-primary mt-0" onclick="take_snapshot()">
+                                    <i class="bx bx-camera"></i> Ambil Foto
+                                </button>
+                                <input type="file" id="file-input" name="file" accept="image/*" style="display: none;" />
+                                <button type="button" class="btn btn-secondary mt-0" onclick="document.getElementById('file-input').click()">
+                                    <i class="bx bx-upload"></i> Unggah Foto
+                                </button>                             
+                                <p>
+                                    <button type="submit" class="btn btn-success mt-0">Submit</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="snapshot-input" name="snapshot"/>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section" id="tutorial">
+        <div class="heading">
+            <span>Tata Cara</span>
+            <h1>Penggunaan</h1>
+        </div>
+        <div class="container">
+                <img src="../static/img/tata cara.png" alt="">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p> © All rights reserved to CabaiCare.2024</p></br>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+    <script>
+        // Setting up Webcam.js
+        Webcam.set({
+            width: 350,
+            height: 350,
+            image_format: 'jpeg',
+            jpeg_quality: 90,
+        });
+
+        Webcam.attach('#camera', function(err) {
+            if (err) {
+                console.error("Webcam attach error:", err);
+                alert('Webcam tidak dapat diakses: ' + err);
+            } else {
+                console.log("Webcam attached successfully.");
+            }
+        });
+
+        // Function to take snapshot and convert to data URI
+        function take_snapshot() {
+            Webcam.snap(function(data_uri) {
+                document.getElementById('result-img').src = data_uri;
+                document.getElementById('camera').style.display = 'none';
+                document.getElementById('result-img').style.display = 'block';
+
+                // Save data URI to hidden input
+                document.getElementById('snapshot-input').value = data_uri;
+            });
+        }
+
+        // Convert Data URI to Blob
+        function dataURItoBlob(dataURI) {
+            var byteString = atob(dataURI.split(',')[1]);
+            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+            var ab = new ArrayBuffer(byteString.length);
+            var ia = new Uint8Array(ab);
+            for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([ab], { type: mimeString });
+        }
+
+        // Handle file input change
+        document.getElementById('file-input').addEventListener('change', function() {
+            var file = this.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                document.getElementById('result-img').src = e.target.result;
+                document.getElementById('camera').style.display = 'none';
+                document.getElementById('result-img').style.display = 'block';
+
+                // Clear snapshot input if file is uploaded
+                document.getElementById('snapshot-input').value = '';
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        // Menampilkan overlay loading saat form dikirim
+        function showLoading() {
+            document.getElementById('loading-overlay').classList.add('active');
+        }
+
+        // Menyembunyikan overlay loading
+        function hideLoading() {
+            document.getElementById('loading-overlay').classList.remove('active');
+        }
+
+        // Handle form submit
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            var snapshot = document.getElementById('snapshot-input').value;
+            showLoading();
+
+            if (snapshot) {
+                // If snapshot is available, convert it to a file and append to the form data
+                event.preventDefault();
+                console.log("Submitting snapshot");
+
+                var blob = dataURItoBlob(snapshot);
+                var file = new File([blob], "snapshot.jpg", { type: "image/jpeg" });
+
+                var formData = new FormData();
+                formData.append('file', file);
+
+                console.log('FormData snapshot:', file);
+
+                // Send the form data to the server
+                fetch('/predict', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .then(html => {
+                    hideLoading();
+                    // Load the HTML content into a new window or a div
+                    document.write(html);
+                })
+                .catch(error => {
+                    hideLoading();
+                    console.error('Error:', error);
+                    alert('Prediction failed: ' + error.message);
+                });
+            } else {
+                console.log("Submitting file upload");
+            }
+        });
+    </script>
+</body>
+</html>
