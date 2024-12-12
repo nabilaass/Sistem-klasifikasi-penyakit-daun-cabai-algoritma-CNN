@@ -1,8 +1,8 @@
 URL aplikasi : http://194.31.53.102:20105
 # Screenshot Aplikasi
 
-![image](https://github.com/user-attachments/assets/e2a03381-7a85-4977-987a-976ccdb99241)
-![image](https://github.com/user-attachments/assets/7b1daae9-ccce-46e8-855f-1896e104b4e2)
-![image](https://github.com/user-attachments/assets/79bf96ec-21f0-43d1-b6bb-349a1efe958b)
-![image](https://github.com/user-attachments/assets/5891b284-7347-470a-a4ad-ea8cc8085bc0)
-![image](https://github.com/user-attachments/assets/9e5e08cf-9e3c-40ee-be85-a39ac60cb047)
+![image](https://github.com/user-attachments/assets/87799b5b-9d6a-469b-8522-ea17ba6a4fb1)
+![image](https://github.com/user-attachments/assets/2cfb8084-15e5-477d-bccb-83154eba1ab2)
+![image](https://github.com/user-attachments/assets/ba4b20d9-edec-4905-8207-68ea9a79c5f4)
+![image](https://github.com/user-attachments/assets/046a02cd-9f3a-4c31-8779-afb44d381db9)
+![image](https://github.com/user-attachments/assets/a07769aa-6754-4246-b3d9-6113ccefada9)
